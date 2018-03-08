@@ -29,8 +29,12 @@ CmdTrigger.prototype._setOn = function(on, callback) {
   if (on) {
     //Execute command from config file
     exec(this.command, (error, stdout, stderr) => {
-      console.log(stdout);
-      console.error(stderr);
+      if ( stdout ) {
+        this.log("Command output: '" + stdout + "'");
+      }
+      if ( stderr ) {
+        this.log("Command error: '" + stderr + "'");
+      }
     });
     this.log("Command executed: '" + this.command + "'");
     //Turn off switch again after 500ms
